@@ -24,28 +24,27 @@ const questions = [
   {
     question: "What does HTML stand for?",
     answers: [
-      { text: "Liver", correct: false },
-      { text: "Heart", correct: false },
-      { text: "Brain", correct: false },
-      { text: "Skin", correct: true }
+      { text: "Hidden Text Milage Language", correct: false },
+      { text: "Heavy Text Markup Language", correct: false },
+      { text: "Hyper Text Markup Language", correct: true },
+      { text: "Hello Telegram Milage Lanyard", correct: false }
     ]
   },
   {
     question: "Javascript can't make a page interactive. True or false",
     answers: [
-      { text: "Germany", correct: false },
-      { text: "Brazil", correct: false },
-      { text: "France", correct: true },
-      { text: "Spain", correct: false }
+      { text: "false", correct: true },
+      { text: "true", correct: false },
+
     ]
   },
   {
     question: "CSS stands for what?",
     answers: [
-      { text: "Cascading Simple Style", correct: true },
+      { text: "Cascading Simple Style", correct: false },
       { text: "Color Simple Sheet", correct: false },
       { text: "Color Style Sheet", correct: false },
-      { text: "Cascading Style Sheet", correct: false }
+      { text: "Cascading Style Sheet", correct: true }
     ]
   }
 ];
@@ -178,7 +177,7 @@ function endQuiz() {
   resultContainer.textContent = `You scored ${score} out of ${questions.length} questions.`;
   document.body.append(resultContainer);
 }
-
+  
 
 
 
