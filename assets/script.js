@@ -2,7 +2,7 @@
 
 
 // Define an array of questions
-const questions = [
+var questions = [
   {
     question: "Which syntax is wrong?",
     answers: [
@@ -50,20 +50,21 @@ const questions = [
 ];
 
 // Get DOM elements
-const startButton = document.getElementById("start-btn");
-const nextButton = document.getElementById("next-btn");
-const questionContainer = document.getElementById("question-container");
-const questionElement = document.getElementById("question");
-const answerButtons = document.getElementById("answer-buttons");
+var startButton = document.getElementById("start-btn");
+var nextButton = document.getElementById("next-btn");
+var questionContainer = document.getElementById("question-container");
+var questionElement = document.getElementById("question");
+var answerButtons = document.getElementById("answer-buttons");
 
 // Track current question and score
-let currentQuestionIndex = 0;
-let score = 0;
+var currentQuestionIndex = 0;
+var score = 0;
 
 // Add event listeners to buttons
 startButton.addEventListener("click", startQuiz);
 nextButton.addEventListener("click", () => {
   currentQuestionIndex++;
+  
   setNextQuestion();
 });
 
@@ -76,7 +77,7 @@ function startQuiz() {
 
 // Function to set the next question
 function setNextQuestion() {
-  
+
   resetState();
   showQuestion(questions[currentQuestionIndex]);
 }
@@ -85,7 +86,7 @@ function setNextQuestion() {
 function showQuestion(question) {
   questionElement.textContent = question.question;
   question.answers.forEach(answer => {
-    const button = document.createElement("button");
+    var button = document.createElement("button");
     button.textContent = answer.text;
     button.classList.add("btn");
     if (answer.correct) {
@@ -96,22 +97,30 @@ function showQuestion(question) {
   });
 }
 
+
+
+
+
+
 // Function to reset the state of the quiz
 function resetState() {
 
   clearStatusClass(document.body);
   nextButton.classList.add("hide");
-
-
+  
   while (answerButtons.firstChild) {
     answerButtons.removeChild(answerButtons.firstChild);
   }
 }
 
+
+
+
 // Function to handle the selection of an answer
 function selectAnswer(e) {
-  const selectedButton = e.target;
-  const correct = selectedButton.dataset.correct;
+  
+  var selectedButton = e.target;
+  var correct = selectedButton.dataset.correct;
   setStatusClass(document.body, correct);
   Array.from(answerButtons.children).forEach(button => {
     setStatusClass(button, button.dataset.correct);
@@ -122,7 +131,7 @@ function selectAnswer(e) {
     var answerResponseArray = ['correct','wrong'];
     createResponse.textContent = answerResponseArray[0];
     questionContainer.append(createResponse);
-   
+    
     score++;
   }
   else if (!correct) {
@@ -132,26 +141,35 @@ function selectAnswer(e) {
     questionContainer.append(createResponse);
    
     score--;
-  };
+  } 
 
 
 // var answerP = document.createElement('h1');
 // answerP.textContent = answerResponseArray[1];
 // questionContainerEl.append(answerP);
 
+function endQuiz () {
+var displayEndMessage = document.createElement('h2');
+displayEndMessage.textContent = "You've Finished the quiz! Congrats!"
+questionContainer.append(displayEndMessage);
+}
 
 
   if (currentQuestionIndex === questions.length - 1) {
     nextButton.textContent = "Finish";
+  
   }
 
-  if (currentQuestionIndex === questions.length) {
+  if (currentQuestionIndex == questions.length ) {
     endQuiz();
   } else {
     nextButton.classList.remove("hide");
-  
+    
   }
 }
+
+
+
 
 // Function to set the status class for an element
 function setStatusClass(element, correct) {
@@ -169,15 +187,9 @@ function clearStatusClass(element) {
   element.classList.remove("wrong");
 }
 
-// Function to end the quiz and display the score
-function endQuiz() {
-  questionContainer.classList.add("hide");
-  nextButton.classList.add("hide");
-  const resultContainer = document.createElement("div");
-  resultContainer.textContent = `You scored ${score} out of ${questions.length} questions.`;
-  document.body.append(resultContainer);
-}
-  
+
+
+
 
 
 
@@ -261,6 +273,78 @@ function endQuiz() {
 //   questionContainerEl.append(answerP);
 //   setNextQuestion();
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// var startButton = document.querySelector("#start-btn");
+// var answerButtons = document.querySelector(".btn");
+// var controls = document.querySelector(".controls");
+// var container = document.querySelector(".container");
+// var questionContainer = document.querySelector("#question-container");
+// var questionArray = ["1. Hows it going?","2. Whatsup?","3. will this work?"];
+// var answerOptions = ["Good", "Bad", "okay"];
+
+// for(i = 0; i < questionArray.length; i++) {
+
+// }
+
+
+// startButton.addEventListener("click", function(){
+//   startButton.setAttribute("class","hide");
+//   controls.setAttribute("class","hide")
+//   container.setAttribute("class","hide")
+
+
+//   var newH1 = document.createElement("h1");
+//   newH1.textContent = questionArray[0];
+//   document.body.appendChild(newH1);
+
+//   // questionContainer.setAttribute("class","visible");
+//   document.body.appendChild(answerButtons);
+
+
+//   // var addButton = document.createElement("button");
+//   // addButton.textContent = answerOptions[0];
+//   // document.body.appendChild(addButton);
+//   // addButton.setAttribute("id","btn")
+
+//   // var addButton = document.createElement("button");
+//   // addButton.textContent = answerOptions[1];
+//   // document.body.appendChild(addButton);
+//   // addButton.setAttribute("id","btn")
+
+//   // var addButton = document.createElement("button");
+//   // addButton.textContent = answerOptions[2];
+//   // document.body.appendChild(addButton);
+//   // addButton.setAttribute("id","btn")
+
+
+
+
+// })
+
 
 
 

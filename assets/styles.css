@@ -33,3 +33,8 @@ body {
 .visible {
   display:block;
 }
+
+.new-class {
+  display: block;
+  /* color: pink; */
+}
