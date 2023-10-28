@@ -31,7 +31,7 @@ var questions = [
     ]
   },
   {
-    question: "Javascript can't make a page interactive. True or false",
+    question: "Javascript can't make a page interactive.",
     answers: [
       { text: "false", correct: true },
       { text: "true", correct: false },
@@ -145,9 +145,9 @@ function selectAnswer(e) {
   setStatusClass(document.body, correct);
 
   if (correct) {
-    score++; // Increment score when the answer is correct
+    score++;
   } else {
-    score--; // Decrement score when the answer is wrong
+    score--;
   }
 
   
@@ -164,7 +164,7 @@ function selectAnswer(e) {
   if (correct) {
     var createResponse = document.createElement("h1");
     createResponse.setAttribute('id', 'rightOrWrong');
-    createResponse.textContent = "correct";
+    createResponse.textContent = "Correct Answer! Well Done!";
     questionContainer.append(createResponse);
     correctWrongElements.push(createResponse);
     nextButton.classList.remove('hide');
@@ -172,7 +172,7 @@ function selectAnswer(e) {
   } else if (!correct) {
     var createResponse = document.createElement("h1");
     createResponse.setAttribute('id', 'rightOrWrong');
-    createResponse.textContent = "wrong";
+    createResponse.textContent = "Wrong answer, please try again!";
     questionContainer.append(createResponse);
     correctWrongElements.push(createResponse);
     score--;
