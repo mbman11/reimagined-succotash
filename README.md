@@ -1,8 +1,11 @@
-# reimagined-succotash
+
 ## Coding Quiz
 
-This coding quiz was made by altering html elements with javascript. 
+* This coding quiz was made by altering html elements with javascript, html, and css! 
 
-![Alt text](<Screen Shot 2023-07-16 at 8.38.33 PM.png>)
+GitHub Profile: https://github.com/mbman11
 
-This was my first ever attempt at creating a real working javascript application. It is not perfect but it is progress! Ive learned a good amount and going to improve this as I get better.
+Github Repo Url: https://github.com/mbman11/reimagined-succotash.git
+
+
+![Alt text](<Screen Shot 2023-10-28 at 6.36.07 AM.png>)
