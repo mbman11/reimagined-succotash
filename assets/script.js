@@ -49,7 +49,6 @@ var questions = [
   }
 ];
 
-// Get DOM elements
 var startButton = document.getElementById("start-btn");
 var nextButton = document.getElementById("next-btn");
 var questionContainer = document.getElementById("question-container");
@@ -62,11 +61,15 @@ var score = 0;
 
 // Add event listeners to buttons
 startButton.addEventListener("click", startQuiz);
+
+
 nextButton.addEventListener("click", () => {
+
   currentQuestionIndex++;
-  
   setNextQuestion();
 });
+
+
 
 // Function to start the quiz
 function startQuiz() {
@@ -75,17 +78,28 @@ function startQuiz() {
   setNextQuestion();
 }
 
-// Function to set the next question
-function setNextQuestion() {
 
+function setNextQuestion() {
   resetState();
-  showQuestion(questions[currentQuestionIndex]);
+  correctWrongElements.forEach(element => {
+    element.remove();
+  });
+  correctWrongElements = [];
+
+  if (currentQuestionIndex < questions.length) {
+    showQuestion(questions[currentQuestionIndex]);
+  } else {
+    questionElement.textContent = 'Quiz Completed!';
+    answerButtons.innerHTML = '';
+  }
 }
 
 // Function to display a question and its answer choices
 function showQuestion(question) {
+
   questionElement.textContent = question.question;
   question.answers.forEach(answer => {
+    
     var button = document.createElement("button");
     button.textContent = answer.text;
     button.classList.add("btn");
@@ -95,83 +109,76 @@ function showQuestion(question) {
     button.addEventListener("click", selectAnswer);
     answerButtons.appendChild(button);
   });
+  
 }
 
-
-
-
-
-
-// Function to reset the state of the quiz
+// Function to reset the quiz container
 function resetState() {
 
   clearStatusClass(document.body);
-  nextButton.classList.add("hide");
   
+  nextButton.classList.add("hide");
+
   while (answerButtons.firstChild) {
     answerButtons.removeChild(answerButtons.firstChild);
   }
-}
-
-
-
-
-// Function to handle the selection of an answer
-function selectAnswer(e) {
-  
-  var selectedButton = e.target;
-  var correct = selectedButton.dataset.correct;
-  setStatusClass(document.body, correct);
-  Array.from(answerButtons.children).forEach(button => {
-    setStatusClass(button, button.dataset.correct);
-  });
-
-  if (correct) {
-    var createResponse = document.createElement("h1");
-    var answerResponseArray = ['correct','wrong'];
-    createResponse.textContent = answerResponseArray[0];
-    questionContainer.append(createResponse);
-    
-    score++;
+  if (currentQuestionIndex === questions.length - 1) {
+    nextButton.textContent = "Finish";
   }
-  else if (!correct) {
-    var createResponse = document.createElement("h1");
-    var answerResponseArray = ['correct','wrong'];
-    createResponse.textContent = answerResponseArray[1];
-    questionContainer.append(createResponse);
-   
-    score--;
+  if (currentQuestionIndex == questions.length) {
+    questionElement.textContent = 'Quiz Completed!';
+    var hideResponse = document.getElementById('rightOrWrong');
+    hideResponse.classList.add('hide');
+
+
+    
+    }
   } 
 
 
-// var answerP = document.createElement('h1');
-// answerP.textContent = answerResponseArray[1];
-// questionContainerEl.append(answerP);
 
-function endQuiz () {
-var displayEndMessage = document.createElement('h2');
-displayEndMessage.textContent = "You've Finished the quiz! Congrats!"
-questionContainer.append(displayEndMessage);
-}
+var correctWrongElements = [];
 
+function selectAnswer(e) {
+  var selectedButton = e.target;
+  var correct = selectedButton.dataset.correct;
+  setStatusClass(document.body, correct);
 
-  if (currentQuestionIndex === questions.length - 1) {
-    nextButton.textContent = "Finish";
-  
-  }
-
-  if (currentQuestionIndex == questions.length ) {
-    endQuiz();
+  if (correct) {
+    score++; // Increment score when the answer is correct
   } else {
-    nextButton.classList.remove("hide");
-    
+    score--; // Decrement score when the answer is wrong
+  }
+
+  
+
+  Array.from(answerButtons.children).forEach(button => {
+    setStatusClass(button, button.dataset.correct);
+  });
+  correctWrongElements.forEach(element => {
+    element.remove();
+  });
+
+  correctWrongElements = [];
+
+  if (correct) {
+    var createResponse = document.createElement("h1");
+    createResponse.setAttribute('id', 'rightOrWrong');
+    createResponse.textContent = "correct";
+    questionContainer.append(createResponse);
+    correctWrongElements.push(createResponse);
+    nextButton.classList.remove('hide');
+    score++;
+  } else if (!correct) {
+    var createResponse = document.createElement("h1");
+    createResponse.setAttribute('id', 'rightOrWrong');
+    createResponse.textContent = "wrong";
+    questionContainer.append(createResponse);
+    correctWrongElements.push(createResponse);
+    score--;
   }
 }
 
-
-
-
-// Function to set the status class for an element
 function setStatusClass(element, correct) {
   clearStatusClass(element);
   if (correct) {
@@ -181,34 +188,11 @@ function setStatusClass(element, correct) {
   }
 }
 
-// Function to clear the status class of an element
 function clearStatusClass(element) {
   element.classList.remove("correct");
   element.classList.remove("wrong");
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
