@@ -55,7 +55,6 @@ var questionContainer = document.getElementById("question-container");
 var questionElement = document.getElementById("question");
 var answerButtons = document.getElementById("answer-buttons");
 
-// Track current question and score
 var currentQuestionIndex = 0;
 var score = 0;
 
